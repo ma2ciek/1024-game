@@ -5,13 +5,11 @@
         throw TypeError('wrong format');
 }
 
-Counter.prototype.count = function() {
+Counter.prototype.count = function () {
     this._count--;
-    if(this._count < 0)
+    if (this._count < 0)
         callback();
-}
-
-
+};
 
 function loadImages(list, callback) {
     var imageList = {};

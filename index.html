@@ -1,20 +1,111 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-		<title>1024</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="style.css">
-        <script src="res/polyfill.js"></script>
-        <script src="classes/Player.js"></script>
-        <script src="classes/Geometry.js"></script>
-        <script src="classes/Map.js"></script>
-        <script src="classes/Counter.js"></script>
-        <script src="classes/Game.js"></script>
-        <script src="classes/Keyboard.js"></script>
-        <script src="classes/DotManager.js"></script>
-		<script src="main.js"></script>
-	</head>
-	<body>
-		<canvas></canvas>
-	</body>
+<head>
+    <title>Gravity</title>
+    <meta charset="utf-8" />
+    <script>
+
+        const PLAYER_START_SIZE = 600 * 6;
+
+    </script>
+    <script src="classes/Geometry.js"></script>
+    <script src="res/polyfill.js"></script>
+    <script src="classes/Player.js"></script>
+    <script src="classes/Map.js"></script>
+    <script src="classes/Counter.js"></script>
+    <script src="classes/Game.js"></script>
+    <script src="classes/Keyboard.js"></script>
+    <script src="classes/DotManager.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial;
+            color: white;
+            height: 100%;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: fantasy;
+            font-size: 60px;
+            letter-spacing: 15px;
+            color: #05a;
+        }
+
+        footer {
+            color: #AAA;
+            position: absolute;
+            bottom: 10px;
+            right: 17px;
+            width: 150px;
+        }
+
+        a {
+            color: #AAA;
+        }
+
+        #controls {
+            position: absolute;
+            right: 10px;
+            width: 170px;
+            top: 50%;
+        }
+
+        #win {
+            position: absolute;
+            width: 50%;
+            height: 50vh;
+            left: 25%;
+            top: 25vh;
+            visibility: hidden;
+            background: #FFF;
+            color: black;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 100px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        #cel {
+            position: absolute;
+            right: 10px;
+            width: 170px;
+            top: 10px;
+            z-index: 20;
+        }
+    </style>
+    <script src="override.js"></script>
+
+
+
+</head>
+<body>
+    <h1>Gravity</h1>
+    <canvas></canvas>
+    <div id="cel">
+        <h2>Goals: </h2>
+        <div>Try to eat smaller planets of the same color, grow and reach 1024 points</div>
+    </div>
+    <div id="controls">
+        <h2>Controls</h2>
+        <div>Move: Arrows</div>
+        <div>Speed boost: [SHIFT]</div>
+        <div>Color change: [TAB] </div>
+    </div>
+    <footer>
+        <div>Author: Maciej Bukowski</div>
+        <div>Music: <a link href="http://opengameart.org/content/icemountain">Ice Mountain</a></div>
+    </footer>
+    <div id="win">You win! Congrats!</div>
+</body>
 </html>

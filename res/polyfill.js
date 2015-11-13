@@ -4,10 +4,13 @@
 }
 
 
-function drawArc(ctx, x, y, r, color) {
+function drawArc(ctx, x, y, r, color, start, end) {
     ctx.beginPath();
+    start = start || 0;
+    end = end || Math.PI * 2;
     ctx.fillStyle = color;
-    ctx.arc(x, y, r, 0, 2 * Math.PI);
+    ctx.arc(x, y, r, start, end);
+    ctx.lineTo(x, y, r);
     ctx.fill();
     ctx.closePath();
 }

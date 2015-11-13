@@ -5,19 +5,19 @@
 var _p = DotManager.prototype;
 
 _p.tryCreate = function () {
-    chance(DOT_CREATION_FREQ, this._create.bind(this));
+    chance(DOT_CREATION_FREQ, this.create.bind(this));
 }
 
-_p._create = function () {
-    var dot = new Dot();
-    this._list.push(new Dot());
+_p.create = function (type, x, y, size, velocity) {
+    var dot = new Dot(type, x, y, size, velocity);
+    this._list.push(dot);
 }
 
 _p.draw = function () {
     ctx.globalCompositeOperation = 'source-atop';
     for (var i = 0; i < this._list.length; i++) {
         var dot = this._list[i];
-        var wsp = rel(dot);
+        var wsp = getScreenPosition(dot);
         if (player.see(dot)) {
             drawArc(ctx, wsp.x, wsp.y, Math.sqrt(dot.size), dot.color);
         }
@@ -28,7 +28,7 @@ _p.draw = function () {
 _p.grow = function () {
     for (var i = 0; i < this._list.length; i++) {
         var dot = this._list[i];
-        chance(0.01, dot.grow.bind(dot));
+        chance(DOT_GROW_FREQ, dot.grow.bind(dot));
     }
 }
 
@@ -51,7 +51,7 @@ _p.move = function () {
         }
             
         var f = dot.size * playerR * playerR;
-        v.toSize(f / distance / distance * x * GRAVITY_FORCE);
+        v.toSize(f * x * GRAVITY_FORCE / distance / distance);
 
 
         dot.Vx += v[0];
@@ -78,15 +78,13 @@ function Dot() {
     var fi = rand(0, 2*Math.PI);
 
     this.x = x + distance * Math.cos(fi);
-    this.y = x + distance * Math.sin(fi);
+    this.y = y + distance * Math.sin(fi);
 
     this.size = rand(1, 10) | 0;
     this.Vy = rand(-1, 1);
     this.Vx = rand(-1, 1);
     this.type = rand(0, 2) | 0;
     this.color = colors[this.type];
-
-   // console.log(this.x, this.y);
 }
 
 Dot.prototype.grow = function () {

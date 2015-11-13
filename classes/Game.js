@@ -15,14 +15,22 @@ _p.play = function () {
     canvas.clear();
     player.drawRange();
     player.draw();
+    player.drawHighScore();
     dots.draw();
+
 
     this._frameIndex++;
     window.requestAnimationFrame(this.play.bind(this));
 }
 
-_p.over = function () {
+_p.over = function (success) {
     this._paused = 1;
+    if (success) {
+        window.location.href = 'index.html#win';
+    }
+    else {
+        window.location.href = 'index.html#lose';
+    }
 }
 
 _p.getFrameNr = function () {
@@ -33,7 +41,16 @@ _p.init = function () {
     this._getCanvas();
     this._setCanvasSize();
     this._setCanvasEventHandlers();
+    this._playAudio();
     this.play();
+}
+
+_p._playAudio = function () {
+    var audio = new Audio();
+    audio.src = 'ice.mp3'
+
+    audio.addEventListener('canplaythrough', audio.play.bind(audio));
+    audio.addEventListener('ended', audio.play.bind(audio))
 }
 
 _p._getCanvas = function () {
